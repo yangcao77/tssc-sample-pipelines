@@ -207,7 +207,7 @@ spec:
         - name: image
           value: $(tasks.build-container.results.IMAGE_URL)@$(tasks.build-container.results.IMAGE_DIGEST)
         - name: gitops-auth-secret-name
-          value: $(params.gitops-auth-secret)
+          value: $(params.gitops-auth-secret-name)
       runAfter:
         - build-container
       taskRef:
