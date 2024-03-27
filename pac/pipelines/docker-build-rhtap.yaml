@@ -82,6 +82,11 @@ spec:
       description: Event that triggered the pipeline run, e.g. push, pull_request
       name: event-type
       type: string
+    - name: gitops-auth-secret-name
+      type: string
+      default: gitops-auth-secret
+      description: |
+        Secret of basic-auth type containing credentials to commit into gitops repository.
   results:
     - name: IMAGE_URL
       value: $(tasks.build-container.results.IMAGE_URL)
@@ -201,6 +206,8 @@ spec:
           value: $(params.git-url)-gitops
         - name: image
           value: $(tasks.build-container.results.IMAGE_URL)@$(tasks.build-container.results.IMAGE_DIGEST)
+        - name: gitops-auth-secret-name
+          value: $(params.gitops-auth-secret)
       runAfter:
         - build-container
       taskRef:
